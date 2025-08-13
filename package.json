@@ -1,0 +1,17 @@
+{
+  "name": "mon-bot-discord",
+  "version": "1.0.0",
+  "description": "Un bot Discord pour la modération et les notifications YouTube.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "deploy": "node deploy-commands.js"
+  },
+  "author": "Ichinose102",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "rss-parser": "^3.13.0"
+  }
+}
