@@ -44,4 +44,18 @@ for (const file of eventFiles) {
     }
 }
 
+// --- SERVEUR WEB POUR UPTIMEROBOT ---
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+  res.send('Le bot est en ligne !');
+});
+
+app.listen(port, () => {
+  console.log(`Serveur web écoutant sur http://localhost:${port}`);
+});
+// ------------------------------------
+
 client.login(process.env.DISCORD_TOKEN);
