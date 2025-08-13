@@ -1,109 +1,64 @@
-Senti - Bot Discord Multifonction
-Un bot de modération et de notifications YouTube, conçu pour être simple, efficace et entièrement personnalisable.
+# Senti - Le Bot Officiel de la Communauté
+
+![Discord.js](https://img.shields.io/badge/discord.js-v14-7289DA?style=for-the-badge&logo=discord&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Statut](https://img.shields.io/badge/statut-en%20ligne-green?style=for-the-badge)
+
+Bienvenue sur le dépôt de **Senti**, le cœur de notre communauté Discord ! Ce bot a été développé sur mesure pour enrichir l'expérience de notre serveur, en connectant directement mes activités de streaming sur **Twitch** et mes créations sur **YouTube**.
 
 <br>
 
-📖 À propos du projet
-Senti a été créé pour répondre à deux besoins essentiels sur un serveur Discord : une modération fiable et des notifications de contenu pertinentes. Il utilise la dernière version de discord.js (v14) et une structure de projet moderne qui rend l'ajout de nouvelles fonctionnalités très facile.
+![Aperçu de la notification YouTube de Senti](https://i.imgur.com/83jWJ9w.png)
 
-Que ce soit pour maintenir un environnement sain avec des outils de modération clairs ou pour tenir votre communauté informée des dernières vidéos de vos créateurs préférés, Senti est l'outil qu'il vous faut.
+## 📖 Le Projet Senti
 
-✨ Fonctionnalités
-🛡️ Modération complète : Commandes slash intuitives pour gérer les membres.
+En tant que créateur, je voulais un outil qui centralise tout. Senti est né de cette idée : créer un bot unique qui non seulement maintient notre serveur Discord propre et accueillant, mais qui agit aussi comme le pont direct avec mes contenus.
 
-/ban : Bannit un membre définitivement.
+Il est conçu pour être à la fois un **gardien** et un **messager**, garantissant que personne ne manque les dernières vidéos ou les prochains lives.
 
-/kick : Expulse un membre du serveur.
+---
 
-/clear : Supprime un nombre défini de messages dans un salon.
+## ✨ Fonctionnalités Clés
 
-📺 Notifications YouTube : Surveille une chaîne YouTube et publie une alerte avec un bel embed dès la sortie d'une nouvelle vidéo.
+Senti est équipé pour gérer les aspects les plus importants de notre communauté :
 
-⚙️ Utilitaire : Commandes de base pour vérifier l'état du bot.
+* 📺 **Alertes YouTube Automatiques**
+    * Surveille ma chaîne YouTube 24/7.
+    * Publie une notification riche et stylisée dans le salon `#annonces` dès qu'une nouvelle vidéo est en ligne. Fini les annonces manuelles !
 
-/ping : Affiche la latence du bot pour s'assurer qu'il répond bien.
+* 🛡️ **Outils de Modération Essentiels**
+    * Une suite de commandes `/` simples pour que la modération soit rapide et efficace.
+    * `/ban`, `/kick`, `/clear` : tout ce qu'il faut pour garder un environnement sain et respectueux pour tout le monde.
 
-🚀 Installation
-Pour héberger votre propre instance de Senti, suivez ces étapes.
+* ⚙️ **Utilitaire de Base**
+    * `/ping` : Une commande simple pour vérifier que le bot est bien éveillé et réactif.
 
-Prérequis
-Node.js (version 20.x ou supérieure recommandée)
+---
 
-Un compte Discord et un serveur où vous avez les droits administrateur.
+## 🚀 Hébergement et Technologie
 
-Étapes
-Clonez le dépôt
+Pour garantir une disponibilité 24/7, Senti est hébergé gratuitement grâce à une combinaison intelligente :
 
-Bash
+* **[Replit](https://replit.com/)** : pour l'exécution du code Node.js dans le cloud.
+* **[UptimeRobot](https://uptimerobot.com/)** : pour s'assurer que le bot ne se met jamais en veille.
 
-git clone https://github.com/votre-pseudo/senti.git
-cd senti
-Installez les dépendances
+Cette configuration assure que le bot est toujours prêt à annoncer une nouvelle vidéo ou à répondre à une commande, à toute heure du jour ou de la nuit.
 
-Bash
+---
 
-npm install
-Configurez le bot
+## 🔧 Configuration Personnelle
 
-Créez un fichier .env à la racine du projet en vous basant sur le modèle ci-dessous.
+Le bot est configuré via deux fichiers principaux pour une séparation claire entre les secrets et les paramètres.
 
-Modifiez le fichier src/config.json pour définir la chaîne YouTube et le salon de notification.
+#### Fichier `.env` (Secrets Locaux)
+Ce fichier reste sur mon ordinateur et n'est jamais partagé. Il contient toutes les clés sensibles.
 
-Déployez les commandes slash
-
-Bash
-
-npm run deploy
-Lancez le bot
-
-Bash
-
-npm run start
-🔧 Configuration
-Senti se configure via deux fichiers très simples.
-
-Fichier .env (pour les secrets)
-Ce fichier contient vos informations sensibles et ne doit JAMAIS être partagé.
-
-Extrait de code
-
-# Le token secret de votre bot
+```env
+# Token d'authentification du bot
 DISCORD_TOKEN=VOTRE_TOKEN_DISCORD
 
-# L'ID de l'application (Client ID) de votre bot
+# ID de l'application (Client ID)
 CLIENT_ID=VOTRE_ID_CLIENT
 
-# L'ID du serveur où vous déployez les commandes (Guild ID)
+# ID du serveur Discord de la communauté
 GUILD_ID=VOTRE_ID_DE_SERVEUR
-Fichier src/config.json (pour la configuration publique)
-JSON
-
-{
-    "youtubeChannelId": "L_ID_DE_LA_CHAINE_YOUTUBE_A_SURVEILLER",
-    "notificationChannelId": "L_ID_DU_SALON_DISCORD_POUR_LES_NOTIFICATIONS",
-    "checkInterval": 300000
-}
-🤖 Commandes disponibles
-/ban <utilisateur> [raison] - Bannit un membre du serveur.
-
-/kick <utilisateur> [raison] - Expulse un membre du serveur.
-
-/clear <nombre> - Supprime entre 1 et 100 messages dans un salon.
-
-/ping - Vérifie la latence du bot et de l'API Discord.
-
-🤝 Contribuer
-Les contributions sont ce qui rend la communauté open source si incroyable. Toute contribution que vous apporterez sera grandement appréciée.
-
-Forkez le projet.
-
-Créez votre branche de fonctionnalité (git checkout -b feature/NouvelleFonctionnalite).
-
-Commitez vos changements (git commit -m 'Ajout de NouvelleFonctionnalite').
-
-Poussez vers la branche (git push origin feature/NouvelleFonctionnalite).
-
-Ouvrez une Pull Request.
-
-📜 Licence
-Distribué sous la licence MIT. Voir LICENSE pour plus d'informations.
