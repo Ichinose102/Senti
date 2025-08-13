@@ -43,8 +43,8 @@ const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
         console.log('Début du rafraîchissement des commandes (/) de l\'application.');
 
         // ⬇️ REMPLACEZ CES VALEURS ⬇️
-        const clientId = 'VOTRE_ID_CLIENT_APPLICATION';
-        const guildId = 'VOTRE_ID_DE_SERVEUR'; 
+        const clientId = '1405194190715093014';
+        const guildId = '1129497747364511795'; 
         // ⬆️ REMPLACEZ CES VALEURS ⬆️
 
         await rest.put(
