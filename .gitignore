@@ -1,0 +1,8 @@
+# Fichier pour les variables d'environnement (TRÈS IMPORTANT)
+.env
+
+# Dossier des dépendances (généré par "npm install")
+node_modules/
+
+# Fichiers de log
+npm-debug.log*
