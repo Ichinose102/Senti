@@ -1,4 +1,4 @@
-# Senti - Le Bot Officiel de la Communauté
+# Senti - Le Bot Officiel de l'Hyperion
 
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-7289DA?style=for-the-badge&logo=discord&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
@@ -8,6 +8,17 @@ Bienvenue sur le dépôt de **Senti**, le cœur de notre communauté Discord ! C
 
 <br>
 
+<p align="center">
+  <a href="https://discord.gg/nqjWGtekKx" target="_blank">
+    <img src="https://img.shields.io/badge/Rejoindre_le_Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"/>
+  </a>
+  <a href="https://www.twitch.tv/ichinose102" target="_blank">
+    <img src="https://img.shields.io/badge/Suivre_sur_Twitch-9146FF?style=for-the-badge&logo=twitch&logoColor=white" alt="Twitch"/>
+  </a>
+  <a href="https://www.youtube.com/@Ichinose102" target="_blank">
+    <img src="https://img.shields.io/badge/S'abonner_sur_YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube"/>
+  </a>
+</p>
 
 ## 📖 Le Projet Senti
 
