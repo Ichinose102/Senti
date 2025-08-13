@@ -8,7 +8,6 @@ Bienvenue sur le dépôt de **Senti**, le cœur de notre communauté Discord ! C
 
 <br>
 
-![Aperçu de la notification YouTube de Senti](https://i.imgur.com/83jWJ9w.png)
 
 ## 📖 Le Projet Senti
 
