@@ -10,6 +10,8 @@
   "author": "Ichinose102",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.15.2",
+    "cheerio": "^1.2.0",
     "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",
     "express": "^5.1.0",

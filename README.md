@@ -48,7 +48,7 @@ Il est conçu pour être à la fois un **gardien** et un **messager**, garantiss
 ### 🎵 Alertes TikTok
 - Surveillance des nouvelles vidéos
 - Embed stylisé avec lien direct
-- Nécessite une clé API rss.app (gratuit)
+- Aucune API externe requise (web scraping)
 
 ### 🛡️ Suite de Modération Complète
 - `/ban` - Bannir un membre
@@ -102,8 +102,8 @@ GUILD_ID=votre_id_de_serveur
 TWITCH_CLIENT_ID=votre_client_id_twitch
 TWITCH_ACCESS_TOKEN=votre_token_twitch
 
-# TikTok (optionnel, nécessite rss.app)
-RSS_APP_API_KEY=votre_cle_api_rss_app
+# TikTok (optionnel, pas d'API requise)
+# Aucune configuration supplémentaire nécessaire
 ```
 
 3. **Déployer les commandes**
@@ -130,11 +130,9 @@ curl -X POST 'https://id.twitch.tv/oauth2/token' \
   -d 'grant_type=client_credentials'
 ```
 
-### Obtenir la Clé RSS.app (pour TikTok)
+### TikTok
 
-1. Inscrivez-vous sur [rss.app](https://rss.app)
-2. Créez un flux TikTok pour le créateur souhaité
-3. Récupérez votre clé API dans le dashboard
+Aucune configuration supplémentaire n'est requise. Le bot récupère directement les vidéos via le site de TikTok.
 
 ---
 
@@ -218,9 +216,9 @@ Senti/
 
 - **[discord.js](https://discord.js.org/)** v14 - Framework Discord
 - **[Node.js](https://nodejs.org/)** v20+ - Runtime JavaScript
-- **[rss-parser](https://www.npmjs.com/package/rss-parser)** - Parsing des flux RSS
+- **[rss-parser](https://www.npmjs.com/package/rss-parser)** - Parsing des flux RSS YouTube
 - **[Twitch API](https://dev.twitch.tv/docs/api/)** - Données des streams
-- **[rss.app](https://rss.app/)** - Flux RSS TikTok (tiers)
+- **[axios](https://axios-http.com/)** & **[cheerio](https://cheerio.js.org/)** - Web scraping TikTok
 
 ---
 
