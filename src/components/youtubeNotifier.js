@@ -1,7 +1,9 @@
 const { EmbedBuilder } = require('discord.js');
 const RssParser = require('rss-parser');
+const { loadYouTubeSubscriptions } = require('../utils/storage');
+
 const parser = new RssParser();
-let lastVideoId = '';
+const lastVideoIds = {}; // Stocke le dernier ID vidéo par chaîne
 
 /**
  * Extrait l'ID d'une vidéo YouTube à partir de son URL.
@@ -13,51 +15,73 @@ function getVideoId(url) {
     return match && match[1];
 }
 
-async function checkYouTube(client, config) {
-    try {
-        const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${config.youtubeChannelId}`;
-        const feed = await parser.parseURL(feedUrl);
-        
-        if (!feed.items.length) return;
-        const latestVideo = feed.items[0];
+async function checkYouTube(client) {
+    const subscriptions = loadYouTubeSubscriptions();
+    const channelsToCheck = Object.keys(subscriptions);
 
-        if (!lastVideoId) {
-            lastVideoId = latestVideo.id;
-            console.log(`[YouTube] Initialisation terminée. Dernière vidéo : ${latestVideo.title}`);
-            return;
-        }
+    if (channelsToCheck.length === 0) return;
 
-        if (latestVideo.id !== lastVideoId) {
-            console.log(`[YouTube] Nouvelle vidéo détectée : ${latestVideo.title}`);
-            lastVideoId = latestVideo.id;
-            
+    for (const channelId of channelsToCheck) {
+        try {
+            const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+            const feed = await parser.parseURL(feedUrl);
+
+            if (!feed.items.length) continue;
+
+            const latestVideo = feed.items[0];
             const videoId = getVideoId(latestVideo.link);
-            if (!videoId) return; // Impossible de trouver l'ID, on arrête
 
-            // Création de l'embed
-            const newVideoEmbed = new EmbedBuilder()
-                .setColor('#FF0000') // La couleur rouge de YouTube
-                .setTitle(latestVideo.title)
-                .setURL(latestVideo.link)
-                .setAuthor({ 
-                    name: feed.title, // Nom de la chaîne YouTube
-                    iconURL: 'https://cdn-icons-png.flaticon.com/512/1384/1384060.png', // Icône YouTube générique
-                    url: feed.link // Lien vers la chaîne
-                })
-                .setDescription("Une nouvelle vidéo vient d'être publiée !")
-                .setImage(`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`) // Miniature de la vidéo
-                .setTimestamp(new Date(latestVideo.isoDate)) // Date de publication
-                .setFooter({ text: 'Notification YouTube', iconURL: client.user.displayAvatarURL() });
+            if (!videoId) continue;
 
-            // Envoi de l'embed dans le salon configuré
-            const channel = await client.channels.fetch(config.notificationChannelId);
-            if (channel) {
-                // On peut aussi ajouter un message texte si on veut pouvoir notifier des rôles
-                channel.send({ embeds: [newVideoEmbed] });
+            // Initialisation
+            if (!lastVideoIds[channelId]) {
+                lastVideoIds[channelId] = videoId;
+                console.log(`[YouTube] Initialisé : ${channelId} -> ${latestVideo.title}`);
+                continue;
             }
+
+            // Nouvelle vidéo détectée
+            if (videoId !== lastVideoIds[channelId]) {
+                lastVideoIds[channelId] = videoId;
+                console.log(`[YouTube] Nouvelle vidéo : ${latestVideo.title}`);
+
+                const sub = subscriptions[channelId];
+                const channel = await client.channels.fetch(sub.channelId);
+
+                if (!channel) {
+                    console.error(`[YouTube] Salon ${sub.channelId} introuvable`);
+                    continue;
+                }
+
+                // Création de l'embed
+                const embed = new EmbedBuilder()
+                    .setColor('#FF0000')
+                    .setTitle(latestVideo.title)
+                    .setURL(latestVideo.link)
+                    .setAuthor({
+                        name: feed.title,
+                        iconURL: 'https://cdn-icons-png.flaticon.com/512/1384/1384060.png',
+                        url: feed.link
+                    })
+                    .setDescription('🎬 Une nouvelle vidéo vient d\'être publiée !')
+                    .setImage(`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`)
+                    .setTimestamp(new Date(latestVideo.isoDate))
+                    .setFooter({
+                        text: 'Notification YouTube',
+                        iconURL: client.user.displayAvatarURL()
+                    });
+
+                // Message avec ping du rôle si configuré
+                const content = sub.roleId ? `<@&${sub.roleId}>` : null;
+
+                await channel.send({
+                    content: content,
+                    embeds: [embed]
+                });
+            }
+        } catch (error) {
+            console.error(`[YouTube] Erreur pour la chaîne ${channelId} :`, error.message);
         }
-    } catch (error) {
-        console.error('[YouTube] Erreur lors de la vérification :', error);
     }
 }
 
